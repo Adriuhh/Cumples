@@ -1,22 +1,44 @@
-<!DOCTYPE html> 
-<html lang="es"> 
-<head> 
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="fm.gif">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
   <title>Cumpleaños del Servidor</title>
+  <link rel="icon" type="image/png" href="fm.gif">
   <style>
+        .main-title {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #facc15;
+      animation: rgbShift 5s linear infinite;
+      -webkit-text-stroke: 1px black; /* borde fino negro */
+      text-stroke: 1px black; /* para navegadores compatibles */
+      z-index: 5;
+    }
+
+    @keyframes rgbShift {
+      0% { color: rgb(255,0,0); }
+      25% { color: rgb(0,255,0); }
+      50% { color: rgb(0,0,255); }
+      75% { color: rgb(255,255,0); }
+      100% { color: rgb(255,0,0); }
+    }
+
     body {
       font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(-45deg, #1e3a8a, #7c3aed, #0f766e, #1e293b);
       background-size: 400% 400%;
       animation: gradientMove 12s ease infinite;
       color: #e5e7eb;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-size: 16.5px; /* ligeramente mayor */
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     @keyframes gradientMove {
@@ -25,78 +47,258 @@
       100% { background-position: 0% 50%; }
     }
 
-    .card {
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .person-card {
       background: #020617;
       border-radius: 14px;
-      padding: 28px 36px;
-      width: 460px; /* un poco más ancha */
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
-    }
-
-    h1 {
+      padding: 28px;
       text-align: center;
-      margin-bottom: 24px;
-      color: #facc15;
-      white-space: nowrap;
-      font-size: 1.6em; /* antes 1.4 aprox */
+      cursor: pointer;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: popIn 0.5s ease forwards;
+      color: #fff;
+      border: 4px solid transparent;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .person-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.65);
     }
 
-    li {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #1e293b;
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    li:last-child {
-      border-bottom: none;
-    }
+    /* Bordes festivos */
+    .adrian { border-color: #f59e0b; }
+    .natalia { border-color: #ec4899; }
+    .david { border-color: #3b82f6; }
+    .iker { border-color: #10b981; }
+    .hector { border-color: #8b5cf6; }
+    .sami { border-color: #f43f5e; }
 
-    .name {
+    .person-name {
+      font-size: 1.4em;
       font-weight: bold;
-      font-size: 1.05em;
+      margin-bottom: 6px;
+      white-space: nowrap;
     }
 
-    .date {
-      color: #94a3b8;
+    .person-date {
       font-size: 1em;
+      opacity: 0.9;
     }
 
-    footer {
+    /* Sección individual */
+    .person-section {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      margin-top: 22px;
-      font-size: 0.95em;
-      color: #64748b;
+      color: #e5e7eb;
+      padding: 20px;
+      z-index: 10;
+      overflow: hidden;
     }
+
+    /* Fondo negro detrás del contenido */
+    .section-content {
+      background: rgba(0,0,0,0.8);
+      padding: 30px 50px;
+      border-radius: 16px;
+      z-index: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .person-section h1 {
+      font-size: 2.5em;
+      margin-bottom: 12px;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .person-section p {
+      font-size: 1.3em;
+      margin-bottom: 24px;
+      color: #94a3b8;
+    }
+
+    .countdown {
+      font-size: 2em;
+      font-weight: bold;
+      color: #facc15;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 1.5em;
+      background: none;
+      border: 2px solid #facc15;
+      color: #facc15;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .close-btn:hover {
+      background: #facc15;
+      color: #020617;
+    }
+
+    /* Confeti más lento desde arriba */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #facc15;
+      opacity: 0.8;
+      pointer-events: none;
+      top: -10px; /* empieza desde arriba */
+      animation: fall linear infinite;
+      z-index: 0; /* detrás del contenido */
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
     .corner-logo {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  width: 150px;
-  height: 150px;
-  opacity: 0.9;
-}
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      width: 150px;
+      height: 150px;
+      opacity: 0.9;
+    }
+
+    @media(max-width: 900px){ .grid-container { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 600px){ .grid-container { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Cumpleaños del Servidor</h1>
-    <ul>
-      <li><span class="name">Adrián 🎉</span><span class="date">1 mayo 2006</span></li>
-      <li><span class="name">Natalia 🎂</span><span class="date">30 noviembre 2006</span></li>
-      <li><span class="name">David 🎁</span><span class="date">13 marzo 2007</span></li>
-      <li><span class="name">Iker 🎉</span><span class="date">15 abril 2007</span></li>
-      <li><span class="name">Héctor 🎂</span><span class="date">28 febrero 2007</span></li>
-      <li><span class="name">Sami 🎁</span><span class="date">20 abril 2009</span></li>
-    </ul>
-    <footer>🎊 No olvides felicitarles</footer>
+<h1 class="main-title">🎉 Cumpleaños del Servidor 🎉</h1>
+
+  <div class="grid-container">
+    <div class="person-card adrian" data-name="Adrián 🎉" data-date="2006-05-01">
+      <div class="person-name">Adrián 🎉</div>
+      <div class="person-date">1 mayo 2006</div>
+    </div>
+    <div class="person-card natalia" data-name="Natalia 🎂" data-date="2006-11-30">
+      <div class="person-name">Natalia 🎂</div>
+      <div class="person-date">30 noviembre 2006</div>
+    </div>
+    <div class="person-card david" data-name="David 🎁" data-date="2007-03-13">
+      <div class="person-name">David 🎁</div>
+      <div class="person-date">13 marzo 2007</div>
+    </div>
+    <div class="person-card iker" data-name="Iker 🎉" data-date="2007-04-15">
+      <div class="person-name">Iker 🎉</div>
+      <div class="person-date">15 abril 2007</div>
+    </div>
+    <div class="person-card hector" data-name="Hector 🎂" data-date="2007-02-28">
+      <div class="person-name">Hector 🎂</div>
+      <div class="person-date">28 febrero 2007</div>
+    </div>
+    <div class="person-card sami" data-name="Samy 🎁" data-date="2009-04-20">
+      <div class="person-name">Samy 🎁</div>
+      <div class="person-date">20 abril 2009</div>
+    </div>
   </div>
-   <img src="fm.gif" alt="Logo FM" class="corner-logo">
+
+  <!-- SECCIÓN INDIVIDUAL -->
+  <div class="person-section" id="personSection">
+    <button class="close-btn" onclick="closeSection()">Cerrar ✖</button>
+    <div class="section-content">
+      <h1 id="sectionName">Nombre</h1>
+      <p id="sectionDate">Fecha</p>
+      <div class="countdown" id="countdown">00d 00h 00m 00s</div>
+    </div>
+  </div>
+
+  <img src="fm.gif" alt="Logo FM" class="corner-logo">
+
+  <script>
+    const cards = document.querySelectorAll('.person-card');
+    const section = document.getElementById('personSection');
+    const sectionName = document.getElementById('sectionName');
+    const sectionDate = document.getElementById('sectionDate');
+    const countdownEl = document.getElementById('countdown');
+    let countdownInterval;
+    let confettiInterval;
+
+    function createConfetti() {
+      for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.background = `hsl(${Math.random()*360}, 100%, 50%)`;
+        confetti.style.width = confetti.style.height = Math.random()*10 + 5 + 'px';
+        confetti.style.animationDuration = (Math.random()*3 + 5) + 's';
+        section.appendChild(confetti);
+        setTimeout(()=> confetti.remove(), 8000);
+      }
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.dataset.name;
+        const date = card.dataset.date;
+        sectionName.textContent = name;
+        sectionDate.textContent = new Date(date).toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+        section.style.display = 'flex';
+
+        if(countdownInterval) clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+          const now = new Date();
+          let nextBirthday = new Date(date);
+          nextBirthday.setFullYear(now.getFullYear());
+          if(nextBirthday < now) nextBirthday.setFullYear(now.getFullYear()+1);
+          const diff = nextBirthday - now;
+          const days = Math.floor(diff / (1000*60*60*24));
+          const hours = Math.floor((diff / (1000*60*60)) % 24);
+          const minutes = Math.floor((diff / (1000*60)) % 60);
+          const seconds = Math.floor((diff/1000)%60);
+          countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
+
+        if(confettiInterval) clearInterval(confettiInterval);
+        confettiInterval = setInterval(createConfetti, 300);
+      });
+    });
+
+    function closeSection() {
+      section.style.display = 'none';
+      if(countdownInterval) clearInterval(countdownInterval);
+      if(confettiInterval) clearInterval(confettiInterval);
+    }
+  </script>
+
 </body>
 </html>
