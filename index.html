@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="fm.gif">
+  <title>Cumpleaños del Servidor</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(-45deg, #1e3a8a, #7c3aed, #0f766e, #1e293b);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-size: 16.5px; /* ligeramente mayor */
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 14px;
+      padding: 28px 36px;
+      width: 460px; /* un poco más ancha */
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #facc15;
+      white-space: nowrap;
+      font-size: 1.6em; /* antes 1.4 aprox */
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 1.05em;
+    }
+
+    .date {
+      color: #94a3b8;
+      font-size: 1em;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 0.95em;
+      color: #64748b;
+    }
+    .corner-logo {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 150px;
+  height: 150px;
+  opacity: 0.9;
+}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Cumpleaños del Servidor</h1>
+    <ul>
+      <li><span class="name">Adrián 🎉</span><span class="date">1 mayo 2006</span></li>
+      <li><span class="name">Natalia 🎂</span><span class="date">30 noviembre 2006</span></li>
+      <li><span class="name">David 🎁</span><span class="date">13 marzo 2007</span></li>
+      <li><span class="name">Iker 🎉</span><span class="date">15 abril 2007</span></li>
+      <li><span class="name">Héctor 🎂</span><span class="date">28 febrero 2007</span></li>
+      <li><span class="name">Sami 🎁</span><span class="date">20 abril 2009</span></li>
+    </ul>
+    <footer>🎊 No olvides felicitarles</footer>
+  </div>
+   <img src="fm.gif" alt="Logo FM" class="corner-logo">
+</body>
+</html>
